@@ -1,5 +1,7 @@
 package com.example.relationship.model;
 
+import com.example.relationship.model.dto.ItemDto;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,8 +13,18 @@ public class Item {
     private String serialNumber;
 
     @ManyToOne
-    @JoinColumn(name = "card_id")
-    private Cart cart;
+    @JoinColumn(name = "card_id")  // tao khoa ngoai voi ten card_ia trong database
+    private Cart cart;  // tuong ung voi class iten co phan mappedby  cart
+
+
+    /**TRANSFER DTO TO ENTITY */
+    public static Item from(ItemDto itemDto){
+        Item item = new Item();
+        item.setId(itemDto.getId());
+        item.setSerialNumber(itemDto.getSerialNumber());
+        return item;
+    }
+
 
     public Item() {
     }

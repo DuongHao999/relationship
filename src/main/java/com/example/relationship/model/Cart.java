@@ -1,6 +1,8 @@
 package com.example.relationship.model;
 
 
+import com.example.relationship.model.dto.CartDto;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,22 @@ public class Cart {
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items = new ArrayList<>();
+
+    public static Cart from(CartDto cartDto){
+        Cart cart = new Cart();
+        cart.setName(cartDto.getName());
+        return cart;
+    }
+
+    /**  ADD ITEM INTO CART LIST */
+    public void addItem(Item item){
+        items.add(item);
+    }
+
+    /** REMOVE ITEM FROM CART LIST */
+    public void removeItem(Item item){
+        items.remove(item);
+    }
 
     public Cart() {
     }
